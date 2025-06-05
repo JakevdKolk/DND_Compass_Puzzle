@@ -14,8 +14,14 @@ colorCodes colors[] = {
     colorCodes::Yellow,
     colorCodes::Cyan,
     colorCodes::Magenta,
-    colorCodes::White,
-};
+    colorCodes::White};
+
+colorCodes partyColors[] = {
+    colorCodes::Aether,
+    colorCodes::Jiji,
+    colorCodes::Seraphine,
+    colorCodes::Taron,
+    colorCodes::Lucian};
 
 void setup()
 {
@@ -45,8 +51,8 @@ void loop()
     }
   }
 
-  for (int i = 0; i < 7; i++)
+  for (int i = 0; i < 5; i++)
   {
-    colorHandler.pulse_rgbLED(colors[i], 1);
+    colorHandler.pulse_rgbLED(partyColors[i], 1);
   }
 }

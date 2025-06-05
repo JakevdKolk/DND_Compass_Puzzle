@@ -14,6 +14,11 @@ enum class colorCodes
     Magenta,
     White,
     Off,
+    Aether,
+    Lucian,
+    Seraphine,
+    Jiji,
+    Taron
 };
 
 class Colors

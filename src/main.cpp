@@ -44,19 +44,19 @@ void loop()
       digitalWrite(LEDPins[j], j == direction[i] ? LOW : HIGH);
     }
 
-    SetColor(255, 0, 0); 
+    SetColor(255, 0, 0);
     delay(1000);
-    SetColor(0, 255, 0); 
+    SetColor(0, 255, 0);
     delay(1000);
-    SetColor(0, 0, 255); 
+    SetColor(0, 0, 255);
     delay(5000);
-    SetColor(255, 255, 0); 
+    SetColor(255, 255, 0);
     delay(1000);
-    SetColor(0, 255, 255); 
+    SetColor(0, 255, 255);
     delay(1000);
-    SetColor(255, 0, 255); 
+    SetColor(255, 0, 255);
     delay(1000);
-    SetColor(255, 255, 255); 
+    SetColor(255, 255, 255);
     delay(5000);
   }
 }

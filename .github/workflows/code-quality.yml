@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: install dependensies
-        run: sudo apt-get update && sudo apt-get install -y clang-tidy cppcheck clang-format g++
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
 
       - name: Run ccpcheck
-        run: cppcheck --enable=all --inconclusive --quiet --error-exitcode=1
+        run: cppcheck --enable=all --inconclusive --quiet --error-exitcode=1 src/

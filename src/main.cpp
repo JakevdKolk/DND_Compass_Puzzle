@@ -9,7 +9,6 @@ int rgbLED[3] = {12, 13, 14};
 #define BLUE_CHANNEL 2
 
 // Setup function
-// cppcheck-suppress unusedFunction
 void setup()
 {
   for (int i = 0; i < 4; i++)
@@ -34,7 +33,6 @@ void SetColor(int r, int g, int b)
 }
 
 // Main loop
-// cppcheck-suppress unusedFunction
 void loop()
 {
   int direction[4] = {0, 1, 2, 3}; // 0=N, 1=E, 2=S, 3=W

@@ -1,14 +1,22 @@
 #include <Arduino.h>
+#include "colors/colors.h"
+
+Colors colorHandler;
+colorCodes colorCodeList;
 
 int LEDPins[4] = {4, 5, 16, 17};
-
 int rgbLED[3] = {12, 13, 14};
 
-#define RED_CHANNEL 0
-#define GREEN_CHANNEL 1
-#define BLUE_CHANNEL 2
+colorCodes colors[] = {
+    colorCodes::Red,
+    colorCodes::Green,
+    colorCodes::Blue,
+    colorCodes::Yellow,
+    colorCodes::Cyan,
+    colorCodes::Magenta,
+    colorCodes::White,
+};
 
-// Setup function
 void setup()
 {
   for (int i = 0; i < 4; i++)
@@ -25,17 +33,9 @@ void setup()
   ledcAttachPin(rgbLED[2], BLUE_CHANNEL);
 }
 
-void SetColor(int r, int g, int b)
-{
-  ledcWrite(RED_CHANNEL, 255 - r);
-  ledcWrite(GREEN_CHANNEL, 255 - g);
-  ledcWrite(BLUE_CHANNEL, 255 - b);
-}
-
-// Main loop
 void loop()
 {
-  int direction[4] = {0, 1, 2, 3}; // 0=N, 1=E, 2=S, 3=W
+  int direction[4] = {0, 1, 2, 3};
 
   for (int i = 0; i < 4; i++)
   {
@@ -43,20 +43,10 @@ void loop()
     {
       digitalWrite(LEDPins[j], j == direction[i] ? LOW : HIGH);
     }
+  }
 
-    SetColor(255, 0, 0); 
-    delay(1000);
-    SetColor(0, 255, 0); 
-    delay(1000);
-    SetColor(0, 0, 255); 
-    delay(5000);
-    SetColor(255, 255, 0); 
-    delay(1000);
-    SetColor(0, 255, 255); 
-    delay(1000);
-    SetColor(255, 0, 255); 
-    delay(1000);
-    SetColor(255, 255, 255); 
-    delay(5000);
+  for (int i = 0; i < 7; i++)
+  {
+    colorHandler.pulse_rgbLED(colors[i], 1);
   }
 }

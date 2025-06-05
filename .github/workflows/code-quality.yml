@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout
+        uses: actions/checkout@v4
 
       - name: install dependensies
         run: sudo apt-get update && sudo apt-get install -y clang-tidy cppcheck clang-format g++

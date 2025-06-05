@@ -9,6 +9,7 @@ int rgbLED[3] = {12, 13, 14};
 #define BLUE_CHANNEL 2
 
 // Setup function
+// cppcheck-suppress unusedFunction
 void setup()
 {
   for (int i = 0; i < 4; i++)
@@ -33,6 +34,7 @@ void SetColor(int r, int g, int b)
 }
 
 // Main loop
+// cppcheck-suppress unusedFunction
 void loop()
 {
   int direction[4] = {0, 1, 2, 3}; // 0=N, 1=E, 2=S, 3=W
@@ -44,19 +46,19 @@ void loop()
       digitalWrite(LEDPins[j], j == direction[i] ? LOW : HIGH);
     }
 
-    SetColor(255, 0, 0); 
+    SetColor(255, 0, 0);
     delay(1000);
-    SetColor(0, 255, 0); 
+    SetColor(0, 255, 0);
     delay(1000);
-    SetColor(0, 0, 255); 
+    SetColor(0, 0, 255);
     delay(5000);
-    SetColor(255, 255, 0); 
+    SetColor(255, 255, 0);
     delay(1000);
-    SetColor(0, 255, 255); 
+    SetColor(0, 255, 255);
     delay(1000);
-    SetColor(255, 0, 255); 
+    SetColor(255, 0, 255);
     delay(1000);
-    SetColor(255, 255, 255); 
+    SetColor(255, 255, 255);
     delay(5000);
   }
 }

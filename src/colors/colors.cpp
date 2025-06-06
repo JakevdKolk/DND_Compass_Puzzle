@@ -53,16 +53,16 @@ void Colors::applyColor(colorCodes color)
         SetColor(85, 235, 235);
         break;
     case colorCodes::Lucian:
-        SetColor(120, 0, 180);
+        SetColor(35, 0, 90);
         break;
     case colorCodes::Jiji:
-        SetColor(190, 30, 45);
+        SetColor(255, 75, 5);
         break;
     case colorCodes::Taron:
-        SetColor(255, 210, 0);
+        SetColor(140, 28, 171);
         break;
     case colorCodes::Seraphine:
-        SetColor(230, 240, 255);
+        SetColor(172, 39, 44);
         break;
     default:
         SetColor(0, 0, 0);

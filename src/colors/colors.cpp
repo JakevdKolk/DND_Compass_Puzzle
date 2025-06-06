@@ -62,7 +62,7 @@ void Colors::applyColor(colorCodes color)
         SetColor(255, 255, 255);
         break;
     case colorCodes::Aether:
-        SetColor(85, 235, 235);
+        SetColor(0, 197, 179);
         break;
     case colorCodes::Lucian:
         SetColor(35, 0, 90);

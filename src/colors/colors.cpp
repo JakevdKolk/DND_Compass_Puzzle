@@ -1,6 +1,10 @@
 #include <Arduino.h>
 #include "colors.h"
 
+Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
+{
+}
+
 void Colors::SetColor(int r, int g, int b)
 {
     ledcWrite(RED_CHANNEL, 255 - r);

@@ -23,7 +23,14 @@ enum class colorCodes
 
 class Colors
 {
+private:
+    int redChannel;
+    int greenChannel;
+    int blueChannel;
+
 public:
+    Colors(int r = RED_CHANNEL, int g = GREEN_CHANNEL, int b = BLUE_CHANNEL);
+
     void applyColor(colorCodes color);
     void SetColor(int r, int g, int b);
     void resetColor();

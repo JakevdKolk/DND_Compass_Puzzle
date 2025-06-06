@@ -30,9 +30,9 @@ void Colors::pulse_rgbLED(colorCodes color, int loopCount)
     for (int i = 0; i < loopCount; ++i)
     {
         applyColor(color);
-        delay(1000);
+        delay(500);
         resetColor();
-        delay(1000);
+        delay(500);
     }
 }
 

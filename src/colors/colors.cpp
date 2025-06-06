@@ -3,7 +3,7 @@
 
 int rgbLED[3] = {12, 13, 14};
 
-Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
+explicit Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
 {
     ledcSetup(redChannel, 5000, 8);
     ledcSetup(greenChannel, 5000, 8);

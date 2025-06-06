@@ -1,9 +1,8 @@
-#include <Arduino.h>
 #include "colors.h"
 
-int rgbLED[3] = {12, 13, 14};
+int rgbLED[3] = {12, 13, 14}; // Define RGB LED pins globally
 
-explicit Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
+Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
 {
     ledcSetup(redChannel, 5000, 8);
     ledcSetup(greenChannel, 5000, 8);
@@ -50,11 +49,11 @@ void Colors::applyColor(colorCodes color)
     case colorCodes::Blue:
         SetColor(0, 0, 255);
         break;
-    case colorCodes::Cyan:
-        SetColor(0, 255, 255);
-        break;
     case colorCodes::Yellow:
         SetColor(255, 255, 0);
+        break;
+    case colorCodes::Cyan:
+        SetColor(0, 255, 255);
         break;
     case colorCodes::Magenta:
         SetColor(255, 0, 255);
@@ -66,10 +65,10 @@ void Colors::applyColor(colorCodes color)
         SetColor(85, 235, 235);
         break;
     case colorCodes::Lucian:
-        SetColor(35, 0, 90); // darker tone
+        SetColor(35, 0, 90);
         break;
     case colorCodes::Jiji:
-        SetColor(255, 75, 5); // more distinct from Seraphine
+        SetColor(255, 75, 5);
         break;
     case colorCodes::Taron:
         SetColor(140, 28, 171);

@@ -2,18 +2,8 @@
 #include "colors/colors.h"
 
 Colors colorHandler;
-colorCodes colorCodeList;
 
 int LEDPins[4] = {4, 5, 16, 17};
-
-colorCodes colors[] = {
-    colorCodes::Red,
-    colorCodes::Green,
-    colorCodes::Blue,
-    colorCodes::Yellow,
-    colorCodes::Cyan,
-    colorCodes::Magenta,
-    colorCodes::White};
 
 colorCodes partyColors[] = {
     colorCodes::Aether,

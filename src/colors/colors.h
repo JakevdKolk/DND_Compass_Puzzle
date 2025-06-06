@@ -4,6 +4,8 @@
 #define GREEN_CHANNEL 1
 #define BLUE_CHANNEL 2
 
+#include <Arduino.h>
+
 enum class colorCodes
 {
     Red,
@@ -29,7 +31,7 @@ private:
     int blueChannel;
 
 public:
-    Colors(int r = RED_CHANNEL, int g = GREEN_CHANNEL, int b = BLUE_CHANNEL);
+    explicit Colors(int r = RED_CHANNEL, int g = GREEN_CHANNEL, int b = BLUE_CHANNEL);
 
     void applyColor(colorCodes color);
     void SetColor(int r, int g, int b);

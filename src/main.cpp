@@ -5,6 +5,17 @@ Colors colorHandler;
 
 int LEDPins[4] = {4, 5, 16, 17};
 
+int buzzer = 23;
+
+colorCodes colors[] = {
+    colorCodes::Red,
+    colorCodes::Green,
+    colorCodes::Blue,
+    colorCodes::Magenta,
+    colorCodes::Yellow,
+    colorCodes::Cyan,
+    colorCodes::White};
+
 colorCodes partyColors[] = {
     colorCodes::Aether,
     colorCodes::Jiji,
@@ -18,6 +29,7 @@ void setup()
   {
     pinMode(LEDPins[i], OUTPUT);
   }
+  pinMode(buzzer, OUTPUT);
 }
 
 void loop()
@@ -29,8 +41,11 @@ void loop()
     for (int j = 0; j < 4; j++)
     {
       digitalWrite(LEDPins[j], j == direction[i] ? LOW : HIGH);
+      // tone(buzzer, 50 * j);
+      delay(100);
     }
   }
+  // noTone(buzzer);
 
   for (int i = 0; i < 5; i++)
   {

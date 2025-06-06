@@ -30,9 +30,9 @@ void Colors::pulse_rgbLED(colorCodes color, int loopCount)
     for (int i = 0; i < loopCount; ++i)
     {
         applyColor(color);
-        delay(500);
+        delay(1000);
         resetColor();
-        delay(500);
+        delay(1000);
     }
 }
 
@@ -62,7 +62,7 @@ void Colors::applyColor(colorCodes color)
         SetColor(255, 255, 255);
         break;
     case colorCodes::Aether:
-        SetColor(85, 235, 235);
+        SetColor(0, 197, 179);
         break;
     case colorCodes::Lucian:
         SetColor(35, 0, 90);

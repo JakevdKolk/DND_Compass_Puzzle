@@ -5,7 +5,6 @@ Colors colorHandler;
 colorCodes colorCodeList;
 
 int LEDPins[4] = {4, 5, 16, 17};
-int rgbLED[3] = {12, 13, 14};
 
 colorCodes colors[] = {
     colorCodes::Red,
@@ -29,14 +28,6 @@ void setup()
   {
     pinMode(LEDPins[i], OUTPUT);
   }
-
-  ledcSetup(RED_CHANNEL, 5000, 8);
-  ledcSetup(GREEN_CHANNEL, 5000, 8);
-  ledcSetup(BLUE_CHANNEL, 5000, 8);
-
-  ledcAttachPin(rgbLED[0], RED_CHANNEL);
-  ledcAttachPin(rgbLED[1], GREEN_CHANNEL);
-  ledcAttachPin(rgbLED[2], BLUE_CHANNEL);
 }
 
 void loop()
@@ -54,6 +45,5 @@ void loop()
   for (int i = 0; i < 5; i++)
   {
     colorHandler.pulse_rgbLED(partyColors[i], 1);
-
   }
 }

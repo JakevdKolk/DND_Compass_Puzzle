@@ -1,15 +1,24 @@
 #include <Arduino.h>
 #include "colors.h"
 
+int rgbLED[3] = {12, 13, 14};
+
 Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
 {
+    ledcSetup(redChannel, 5000, 8);
+    ledcSetup(greenChannel, 5000, 8);
+    ledcSetup(blueChannel, 5000, 8);
+
+    ledcAttachPin(rgbLED[0], redChannel);
+    ledcAttachPin(rgbLED[1], greenChannel);
+    ledcAttachPin(rgbLED[2], blueChannel);
 }
 
 void Colors::SetColor(int r, int g, int b)
 {
-    ledcWrite(RED_CHANNEL, 255 - r);
-    ledcWrite(GREEN_CHANNEL, 255 - g);
-    ledcWrite(BLUE_CHANNEL, 255 - b);
+    ledcWrite(redChannel, 255 - r);
+    ledcWrite(greenChannel, 255 - g);
+    ledcWrite(blueChannel, 255 - b);
 }
 
 void Colors::resetColor()
@@ -42,10 +51,10 @@ void Colors::applyColor(colorCodes color)
         SetColor(0, 0, 255);
         break;
     case colorCodes::Cyan:
-        SetColor(255, 255, 0);
+        SetColor(0, 255, 255);
         break;
     case colorCodes::Yellow:
-        SetColor(0, 255, 255);
+        SetColor(255, 255, 0);
         break;
     case colorCodes::Magenta:
         SetColor(255, 0, 255);
@@ -57,10 +66,10 @@ void Colors::applyColor(colorCodes color)
         SetColor(85, 235, 235);
         break;
     case colorCodes::Lucian:
-        SetColor(35, 0, 90);
+        SetColor(35, 0, 90); // darker tone
         break;
     case colorCodes::Jiji:
-        SetColor(255, 75, 5);
+        SetColor(255, 75, 5); // more distinct from Seraphine
         break;
     case colorCodes::Taron:
         SetColor(140, 28, 171);
@@ -69,7 +78,7 @@ void Colors::applyColor(colorCodes color)
         SetColor(172, 39, 44);
         break;
     default:
-        SetColor(0, 0, 0);
+        resetColor();
         break;
     }
 }

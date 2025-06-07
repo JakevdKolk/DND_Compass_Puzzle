@@ -30,7 +30,7 @@ protected:
     void setAllLow();
 
 public:
-    compass_state()
+    compass_state() : context_(nullptr)
     {
         pinMode(northPin_, OUTPUT);
         pinMode(eastPin_, OUTPUT);
@@ -57,7 +57,7 @@ private:
     compass_state *state_;
 
 public:
-    compass_context(compass_state *state) : state_(nullptr)
+    explicit compass_context(compass_state *state) : state_(nullptr)
     {
         this->transitionTo(state);
     }

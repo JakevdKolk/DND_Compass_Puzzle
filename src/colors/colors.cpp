@@ -25,14 +25,14 @@ void Colors::resetColor()
     SetColor(0, 0, 0);
 }
 
-void Colors::pulse_rgbLED(colorCodes color, int loopCount)
+void Colors::pulse_rgbLED(colorCodes color, int loopCount, int timeout)
 {
     for (int i = 0; i < loopCount; ++i)
     {
         applyColor(color);
-        delay(500);
+        delay(timeout / 2);
         resetColor();
-        delay(500);
+        delay(timeout / 2);
     }
 }
 

@@ -36,5 +36,5 @@ public:
     void applyColor(colorCodes color);
     void SetColor(int r, int g, int b);
     void resetColor();
-    void pulse_rgbLED(colorCodes color, int loopCount);
+    void pulse_rgbLED(colorCodes color, int loopCount, int timeout);
 };

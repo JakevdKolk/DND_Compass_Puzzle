@@ -16,15 +16,15 @@ void compass_state::setAllLow()
     digitalWrite(westPin_, LOW);
 }
 
-void compass_state::pulseDirection(compass_state *state, directions dir, int count, int timeout)
+void compass_state::pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout)
 {
     context_->transitionTo(state);
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < pulseCount; i++)
     {
         context_->handleDirection(dir);
-        delay(timeout / 2);
+        delay(pulseTimeout / 2);
         setAllHigh();
-        delay(timeout / 2);
+        delay(pulseTimeout / 2);
     }
 }
 

@@ -1,4 +1,5 @@
 #include "state_directions.hpp"
+#include "../compass_state.hpp"
 
 void compass_state::setAllHigh()
 {

@@ -1,0 +1,21 @@
+name: check code quality
+
+on:
+  push:
+    branches: [development, main]
+  pull_request:
+    branches: [development, main]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: install dependensies
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+      - name: Run ccpcheck
+        run: cppcheck --enable=all --inconclusive --quiet --error-exitcode=1 --suppress=unusedFunction --suppress=missingIncludeSystem --template=gcc src/

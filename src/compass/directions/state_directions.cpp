@@ -75,7 +75,7 @@ void state_west::handleDirection(directions dir)
 {
     setAllHigh();
 
-    if (dir == directions::West || dir == directions::North_West)
+    if (dir == directions::West || dir == directions::North_West || dir == directions::South_West)
     {
         digitalWrite(westPin_, LOW);
         if (dir == directions::South_West)

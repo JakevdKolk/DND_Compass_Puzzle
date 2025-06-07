@@ -1,5 +1,5 @@
 #pragma once
-#include "compass/compass_state.hpp"
+#include "../compass_state.hpp"
 
 class state_north : public compass_state
 {

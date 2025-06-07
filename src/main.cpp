@@ -40,44 +40,49 @@ void setup()
 void loop()
 {
   context.pulseDirection(&east, directions::East, 3, 500);
-  delay(2000);
+  delay(500);
   context.pulseDirection(&north, directions::North, 5, 500);
-  delay(2000);
+  delay(500);
   context.pulseDirection(&north, directions::North_East, 5, 250);
-  delay(2000);
-  context.pulseDirection(&all, directions::All, 5, 250);
-  delay(2000);
+  delay(500);
+  context.pulseDirection(&all, directions::All, 10, 300);
+  delay(500);
 
   context.transitionTo(&north);
   context.handleDirection(directions::North);
-  delay(2000);
+  delay(500);
 
   context.handleDirection(directions::North_East);
-  delay(2000);
+  delay(500);
 
   context.transitionTo(&south);
   context.handleDirection(directions::South);
-  delay(2000);
+  delay(500);
   context.handleDirection(directions::South_West);
-  delay(2000);
+  delay(500);
 
   context.transitionTo(&west);
   context.handleDirection(directions::West);
-  delay(2000);
+  delay(500);
   context.handleDirection(directions::North_West);
-  delay(2000);
+  delay(500);
 
   context.transitionTo(&east);
   context.handleDirection(directions::East);
-  delay(2000);
+  delay(500);
   context.handleDirection(directions::South_East);
-  delay(2000);
+  delay(500);
 
   context.transitionTo(&all);
   context.handleDirection(directions::All);
-  delay(2000);
+  delay(500);
 
   context.transitionTo(&off);
   context.handleDirection(directions::Off);
-  delay(2000);
+  delay(500);
+
+  for (int i = 0; i < 5; i++)
+  {
+    colorHandler.pulse_rgbLED(partyColors[i], 5, 1000);
+  }
 }

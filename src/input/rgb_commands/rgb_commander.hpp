@@ -1,6 +1,7 @@
 #pragma once
 #include "../InputCommander.hpp"
-#include "colors/colors.h"
+#include "../../colors/colors.h"
+
 
 class RGBSetColorCommand : public userCommand
 {

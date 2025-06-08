@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "colors/colors.h"
 #include "compass/directions/state_directions.hpp"
+#include "input/InputCommander.hpp"
+#include "input/rgb_commands/rgb_commander.hpp"
+#include "input/compass_commands/compass_commander.hpp"
 
 Colors colorHandler;
 
@@ -10,6 +13,8 @@ state_south south;
 state_west west;
 state_off off;
 state_on all;
+
+commandManager manager;
 
 compass_context context(&off);
 
@@ -33,56 +38,47 @@ colorCodes partyColors[] = {
 
 void setup()
 {
+  colorHandler.applyColor(colorCodes::Off);
+  context.handleDirection(directions::Off);
 
   pinMode(buzzer, OUTPUT);
-}
+  Serial.begin(115200);
+  Serial.setTimeout(10000);
 
+  for (int i = 0; i < commandListSize; i++)
+  {
+    RGBColorRegistration reg = commandList[i];
+    manager.registerCommand(reg.name, new RGBSetColorCommand(&colorHandler, reg.color));
+
+    String pulseName = "P_" + String(reg.name);
+    manager.registerCommand(pulseName, new RGBPulseLEDCommand(&colorHandler, reg.color));
+  }
+
+  for (int i = 0; i < compassCommandListSize; ++i)
+  {
+    const auto &reg = compassCommandList[i];
+
+    manager.registerCommand(reg.name, new compassHandleDirectonCommand(&context, reg.state, reg.dir));
+
+    String pulseName = "P_" + String(reg.name);
+    manager.registerCommand(pulseName, new compassPulseDirectonCommand(&context, reg.state, reg.dir));
+  }
+
+  manager.registerCommand("RGB_OFF", new RGBSetColorCommand(&colorHandler, colorCodes::White)); // RGB_COLORWHITE
+  manager.registerCommand("COMPASS_OFF", new compassHandleDirectonCommand(&context, &off, directions::Off));
+}
 void loop()
 {
-  context.pulseDirection(&east, directions::East, 3, 500);
-  delay(500);
-  context.pulseDirection(&north, directions::North, 5, 500);
-  delay(500);
-  context.pulseDirection(&north, directions::North_East, 5, 250);
-  delay(500);
-  context.pulseDirection(&all, directions::All, 10, 300);
-  delay(500);
 
-  context.transitionTo(&north);
-  context.handleDirection(directions::North);
-  delay(500);
-
-  context.handleDirection(directions::North_East);
-  delay(500);
-
-  context.transitionTo(&south);
-  context.handleDirection(directions::South);
-  delay(500);
-  context.handleDirection(directions::South_West);
-  delay(500);
-
-  context.transitionTo(&west);
-  context.handleDirection(directions::West);
-  delay(500);
-  context.handleDirection(directions::North_West);
-  delay(500);
-
-  context.transitionTo(&east);
-  context.handleDirection(directions::East);
-  delay(500);
-  context.handleDirection(directions::South_East);
-  delay(500);
-
-  context.transitionTo(&all);
-  context.handleDirection(directions::All);
-  delay(500);
-
-  context.transitionTo(&off);
-  context.handleDirection(directions::Off);
-  delay(500);
-
-  for (int i = 0; i < 5; i++)
+  if (Serial.available())
   {
-    colorHandler.pulse_rgbLED(partyColors[i], 5, 1000);
+    Serial.print("> ");
+    String input = Serial.readStringUntil('\n');
+    input.trim();
+    input.toUpperCase();
+
+    manager.executeCommand(input);
+
+    Serial.println("Command executed: " + input);
   }
 }

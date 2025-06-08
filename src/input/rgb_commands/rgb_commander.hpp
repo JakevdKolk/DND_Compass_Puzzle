@@ -25,3 +25,12 @@ public:
     RGBPulseLEDCommand(Colors *colors, colorCodes color, int count, int timeout);
     void Execute() const override;
 };
+
+struct RGBColorRegistration
+{
+    const char *name;
+    colorCodes color;
+};
+
+extern RGBColorRegistration commandList[];
+extern const int commandListSize;

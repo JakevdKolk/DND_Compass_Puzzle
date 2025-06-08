@@ -28,3 +28,13 @@ public:
     compassPulseDirectonCommand(compass_context *context, compass_state *state, directions dir, int count, int timeout);
     void Execute() const override;
 };
+
+struct CompassColorRegistration
+{
+    const char *name;
+    compass_state *state;
+    directions dir;
+};
+
+extern CompassColorRegistration compassCommandList[];
+extern const int compassCommandListSize;

@@ -1,7 +1,6 @@
 #pragma once
 #include "../InputCommander.hpp"
 #include "compass/directions/state_directions.hpp"
-#include "compass/compass_state.hpp"
 
 class compassHandleDirectonCommand : public userCommand
 {

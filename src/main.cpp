@@ -51,7 +51,7 @@ void setup()
     manager.registerCommand(reg.name, new RGBSetColorCommand(&colorHandler, reg.color));
 
     String pulseName = "P_" + String(reg.name);
-    manager.registerCommand(pulseName, new RGBPulseLEDCommand(&colorHandler, reg.color, 5, 250));
+    manager.registerCommand(pulseName, new RGBPulseLEDCommand(&colorHandler, reg.color));
   }
 
   for (int i = 0; i < compassCommandListSize; ++i)
@@ -61,7 +61,7 @@ void setup()
     manager.registerCommand(reg.name, new compassHandleDirectonCommand(&context, reg.state, reg.dir));
 
     String pulseName = "P_" + String(reg.name);
-    manager.registerCommand(pulseName, new compassPulseDirectonCommand(&context, reg.state, reg.dir, 3, 200));
+    manager.registerCommand(pulseName, new compassPulseDirectonCommand(&context, reg.state, reg.dir));
   }
 
   manager.registerCommand("RGB_OFF", new RGBSetColorCommand(&colorHandler, colorCodes::White)); // RGB_COLORWHITE
@@ -72,11 +72,13 @@ void loop()
 
   if (Serial.available())
   {
-    Serial.println("Type command:");
+    Serial.print("> ");
     String input = Serial.readStringUntil('\n');
     input.trim();
     input.toUpperCase();
+
     manager.executeCommand(input);
-    Serial.println("command used: " + input);
+
+    Serial.println("Command executed: " + input);
   }
 }

@@ -5,10 +5,8 @@
 class userCommand
 {
 public:
-    virtual ~userCommand()
-    {
-    }
-    virtual void Execute() const = 0;
+    virtual ~userCommand() {}
+    virtual void Execute(String args = "") const = 0;
 };
 
 class commandManager
@@ -22,15 +20,25 @@ public:
         commands_[key] = command;
     }
 
-    void executeCommand(const String &key)
+    void executeCommand(const String &fullCommand)
     {
-        if (commands_.count(key))
+        int spaceIndex = fullCommand.indexOf(' ');
+        String commandKey = fullCommand;
+        String args = "";
+
+        if (spaceIndex != -1)
         {
-            commands_[key]->Execute();
+            commandKey = fullCommand.substring(0, spaceIndex);
+            args = fullCommand.substring(spaceIndex + 1);
+        }
+
+        if (commands_.count(commandKey))
+        {
+            commands_[commandKey]->Execute(args);
         }
         else
         {
-            Serial.println("Unknown command: " + key);
+            Serial.println("Unknown command: " + commandKey);
         }
     }
 };

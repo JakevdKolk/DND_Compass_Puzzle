@@ -3,17 +3,29 @@
 RGBSetColorCommand::RGBSetColorCommand(Colors *colors, colorCodes color)
     : colors_(colors), color_(color) {}
 
-void RGBSetColorCommand::Execute() const
+void RGBSetColorCommand::Execute(String args) const
 {
     colors_->applyColor(color_);
 }
 
-RGBPulseLEDCommand::RGBPulseLEDCommand(Colors *colors, colorCodes color, int count, int timeout)
-    : colors_(colors), color_(color), loopcount_(count), looptimeout_(timeout) {}
+RGBPulseLEDCommand::RGBPulseLEDCommand(Colors *colors, colorCodes color)
+    : colors_(colors), color_(color) {}
 
-void RGBPulseLEDCommand::Execute() const
+void RGBPulseLEDCommand::Execute(String args) const
 {
-    colors_->pulse_rgbLED(color_, loopcount_, looptimeout_);
+
+    int count = 1;
+    int timeout = 200;
+
+    int spaceIndex = args.indexOf(' ');
+
+    if (spaceIndex > 0)
+    {
+        count = args.substring(0, spaceIndex).toInt();
+        timeout = args.substring(spaceIndex + 1).toInt();
+    }
+
+    colors_->pulse_rgbLED(color_, count, timeout);
 }
 
 RGBColorRegistration commandList[] = {

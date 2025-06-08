@@ -10,7 +10,7 @@ private:
 
 public:
     RGBSetColorCommand(Colors *colors, colorCodes color);
-    void Execute() const override;
+    void Execute(String args) const override;
 };
 
 class RGBPulseLEDCommand : public userCommand
@@ -18,12 +18,10 @@ class RGBPulseLEDCommand : public userCommand
 private:
     colorCodes color_;
     Colors *colors_;
-    int loopcount_;
-    int looptimeout_;
 
 public:
-    RGBPulseLEDCommand(Colors *colors, colorCodes color, int count, int timeout);
-    void Execute() const override;
+    RGBPulseLEDCommand(Colors *colors, colorCodes color);
+    void Execute(String args) const override;
 };
 
 struct RGBColorRegistration

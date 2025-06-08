@@ -3,18 +3,29 @@
 
 compassHandleDirectonCommand::compassHandleDirectonCommand(compass_context *context, compass_state *state, directions dir) : context_(context), state_(state), direction_(dir) {}
 
-void compassHandleDirectonCommand::Execute() const
+void compassHandleDirectonCommand::Execute(String args) const
 {
     context_->transitionTo(state_);
     context_->handleDirection(direction_);
 };
 
-compassPulseDirectonCommand::compassPulseDirectonCommand(compass_context *context, compass_state *state, directions dir, int count, int timeout) : context_(context), state_(state), direction_(dir), pulseCount_(count), pulseTimeout_(timeout) {};
+compassPulseDirectonCommand::compassPulseDirectonCommand(compass_context *context, compass_state *state, directions dir) : context_(context), state_(state), direction_(dir) {};
 
-void compassPulseDirectonCommand::Execute() const
+void compassPulseDirectonCommand::Execute(String args) const
 {
     context_->transitionTo(state_);
-    context_->pulseDirection(state_, direction_, pulseCount_, pulseTimeout_);
+
+    int pulseCount = 1;
+    int pulseTimeout = 200;
+
+    int spaceIndex = args.indexOf(' ');
+    if (spaceIndex > 0)
+    {
+        pulseCount = args.substring(0, spaceIndex).toInt();
+        pulseTimeout = args.substring(spaceIndex + 1).toInt();
+    }
+
+    context_->pulseDirection(state_, direction_, pulseCount, pulseTimeout);
 }
 
 extern state_north north;

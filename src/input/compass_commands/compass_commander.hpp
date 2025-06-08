@@ -12,7 +12,7 @@ private:
 
 public:
     compassHandleDirectonCommand(compass_context *context, compass_state *state, directions dir);
-    void Execute() const override;
+    void Execute(String args) const override;
 };
 
 class compassPulseDirectonCommand : public userCommand
@@ -21,12 +21,10 @@ private:
     compass_context *context_;
     compass_state *state_;
     directions direction_;
-    int pulseCount_;
-    int pulseTimeout_;
 
 public:
-    compassPulseDirectonCommand(compass_context *context, compass_state *state, directions dir, int count, int timeout);
-    void Execute() const override;
+    compassPulseDirectonCommand(compass_context *context, compass_state *state, directions dir);
+    void Execute(String args) const override;
 };
 
 struct CompassColorRegistration

@@ -1,7 +1,7 @@
 #include "rgb_commander.hpp"
 
 RGBSetColorCommand::RGBSetColorCommand(Colors *colors, colorCodes color)
-    : colors_(colors), color_(color) {}
+    : color_(color), colors_(colors) {}
 
 void RGBSetColorCommand::Execute(String args) const
 {
@@ -9,7 +9,7 @@ void RGBSetColorCommand::Execute(String args) const
 }
 
 RGBPulseLEDCommand::RGBPulseLEDCommand(Colors *colors, colorCodes color)
-    : colors_(colors), color_(color) {}
+    : color_(color), colors_(colors) {}
 
 void RGBPulseLEDCommand::Execute(String args) const
 {

@@ -5,7 +5,6 @@
 #include "input/rgb_commands/rgb_commander.hpp"
 #include "input/compass_commands/compass_commander.hpp"
 
-
 Colors colorHandler;
 
 state_north north;
@@ -16,7 +15,6 @@ state_off off;
 state_on all;
 
 commandManager manager;
-
 
 compass_context context(&off);
 
@@ -42,8 +40,8 @@ void setup()
 {
   colorHandler.applyColor(colorCodes::Off);
   context.handleDirection(directions::Off);
-
   pinMode(buzzer, OUTPUT);
+
   Serial.begin(115200);
   Serial.setTimeout(10000);
 
@@ -82,6 +80,5 @@ void loop()
     manager.executeCommand(input);
 
     Serial.println("Command executed: " + input);
-
   }
 }

@@ -1,4 +1,5 @@
 #include "rgb_commander.hpp"
+#include "../../pulsing/pusling.hpp"
 
 RGBSetColorCommand::RGBSetColorCommand(Colors *colors, colorCodes color)
     : colors_(colors), color_(color) {}
@@ -9,21 +10,41 @@ void RGBSetColorCommand::Execute(String args) const
 }
 
 RGBPulseLEDCommand::RGBPulseLEDCommand(Colors *colors, colorCodes color)
-    : color_(color), colors_(colors) {} 
+    : color_(color), colors_(colors) {}
 
 void RGBPulseLEDCommand::Execute(String args) const
 {
+
+    pulsingCodes pulseCodes;
+
     int count = 1;
-    int timeout = 200;
+    pulsingCodes speed = pulsingCodes::Normal;
 
     int spaceIndex = args.indexOf(' ');
     if (spaceIndex > 0)
     {
         count = args.substring(0, spaceIndex).toInt();
-        timeout = args.substring(spaceIndex + 1).toInt();
+        String timeout = args.substring(spaceIndex + 1);
+        timeout.toLowerCase();
+
+        getPulsingTimeout()
     }
 
-    colors_->pulse_rgbLED(color_, count, timeout);
+    colors_->pulse_rgbLED(color_, count, speed);
+}
+
+int getPulsingTimeout(String speed)
+{
+
+    switch (speed)
+    {
+    case:
+
+        break;
+
+    default:
+        break;
+    }
 }
 
 RGBColorRegistration commandList[] = {

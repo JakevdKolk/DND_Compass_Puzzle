@@ -15,6 +15,15 @@ void compass_state::setAllLow()
     digitalWrite(westPin_, LOW);
 }
 
+void compass_context::playPuzzle(const std::vector<directions> &steps, int puzzleDelay)
+{
+    for (directions dir : steps)
+    {
+        this->handleDirection(dir);
+        delay(puzzleDelay);
+    }
+}
+
 void compass_state::pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout)
 {
     context_->transitionTo(state);

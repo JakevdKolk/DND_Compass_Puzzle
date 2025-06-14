@@ -1,8 +1,6 @@
 # DND_Compass_Puzzle
 
-### Command list
-
-### RGB Commands
+# RGB Commands
 
 ## RGB LED
 
@@ -39,7 +37,7 @@
 | `P_RGB_CYAN`    | Pulse Cyan                              |
 | `P_RGB_WHITE`   | Pulse White                             |
 
-### Compass Comands
+# Compass Comands
 
 ## Compass Directions
 
@@ -70,7 +68,7 @@
 | `P_COMPASS_SW`  | Pulse South + West               |
 | `P_COMPASS_ALL` | Pulse all directions             |
 
-# Usage
+### Usage
 
 You can call:
 
@@ -86,7 +84,7 @@ In the serial monitor to pulse North 3 times at 150ms delay.
 | ------------- | ------------- |
 | `COMPASS_PUZ` | Make a puzzle |
 
-# Usage
+### Usage
 
 You can call:
 
@@ -96,7 +94,7 @@ COMPASS_PUZ N NE NW S SE SW 500
 
 in the serial monitor to show to puzzle shown with the compass lights
 
-### Vibration Monitor Commands
+# Vibration Monitor Commands
 
 | Command   | Description              |
 | --------- | ------------------------ |

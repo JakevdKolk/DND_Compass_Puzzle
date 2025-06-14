@@ -30,7 +30,7 @@ class compassPuzzleCommand : public userCommand
 {
 private:
     compass_context *context_;
-    directions parseDirection(const String &token) const;
+    static directions parseDirection(const String &token);
 
 public:
     explicit compassPuzzleCommand(compass_context *context);

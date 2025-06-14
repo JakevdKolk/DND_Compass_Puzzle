@@ -31,7 +31,7 @@ void compassPulseDirectonCommand::Execute(String args) const
 compassPuzzleCommand::compassPuzzleCommand(compass_context *context)
     : context_(context) {}
 
-directions compassPuzzleCommand::parseDirection(const String &token) const
+directions compassPuzzleCommand::parseDirection(const String &token)
 {
     if (token == "N")
         return directions::North;
@@ -53,7 +53,7 @@ directions compassPuzzleCommand::parseDirection(const String &token) const
         return directions::All;
     if (token == "OFF")
         return directions::Off;
-    return directions::Off; // fallback
+    return directions::Off;
 }
 
 void compassPuzzleCommand::Execute(String args) const

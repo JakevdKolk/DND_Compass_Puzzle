@@ -25,12 +25,18 @@ extern state_off off;
 compass_state *directionToState(directions dir)
 {
     if (dir == directions::North || dir == directions::North_East || dir == directions::North_West)
+    {
         return &north;
-    if (dir == directions::East || dir == directions::South_East || dir == directions::North_East)
+        if (dir == directions::North_East)
+            return &north;
+        if (dir == directions::North_West)
+            return &north;
+    }
+    if (dir == directions::East)
         return &east;
     if (dir == directions::South || dir == directions::South_East || dir == directions::South_West)
         return &south;
-    if (dir == directions::West || dir == directions::South_West || dir == directions::North_West)
+    if (dir == directions::West)
         return &west;
     if (dir == directions::All)
         return &all;

@@ -15,11 +15,35 @@ void compass_state::setAllLow()
     digitalWrite(westPin_, LOW);
 }
 
-void compass_context::playPuzzle(const std::vector<directions> &steps, int puzzleDelay)
+extern state_north north;
+extern state_east east;
+extern state_south south;
+extern state_west west;
+extern state_on all;
+extern state_off off;
+
+compass_state *directionToState(directions dir)
+{
+    if (dir == directions::North || dir == directions::North_East || dir == directions::North_West)
+        return &north;
+    if (dir == directions::East || dir == directions::South_East || dir == directions::North_East)
+        return &east;
+    if (dir == directions::South || dir == directions::South_East || dir == directions::South_West)
+        return &south;
+    if (dir == directions::West || dir == directions::South_West || dir == directions::North_West)
+        return &west;
+    if (dir == directions::All)
+        return &all;
+    return &off;
+}
+
+void compass_state::playPuzzle(const std::vector<directions> &steps, int puzzleDelay)
 {
     for (directions dir : steps)
     {
-        this->handleDirection(dir);
+        compass_state *nextState = directionToState(dir);
+        context_->transitionTo(nextState);
+        context_->handleDirection(dir);
         delay(puzzleDelay);
     }
 }

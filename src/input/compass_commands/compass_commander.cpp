@@ -59,7 +59,7 @@ directions compassPuzzleCommand::parseDirection(const String &token) const
 void compassPuzzleCommand::Execute(String args) const
 {
     std::vector<directions> puzzle;
-    int delayMs = 300; // default
+    int delayMs = 300;
 
     int lastSpace = args.lastIndexOf(' ');
     String possibleDelay = args.substring(lastSpace + 1);
@@ -67,7 +67,7 @@ void compassPuzzleCommand::Execute(String args) const
     if (possibleDelay.toInt() > 0)
     {
         delayMs = possibleDelay.toInt();
-        args = args.substring(0, lastSpace); // remove delay part
+        args = args.substring(0, lastSpace);
     }
 
     while (args.length() > 0)

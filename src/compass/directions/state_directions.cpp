@@ -27,10 +27,6 @@ compass_state *directionToState(directions dir)
     if (dir == directions::North || dir == directions::North_East || dir == directions::North_West)
     {
         return &north;
-        if (dir == directions::North_East)
-            return &north;
-        if (dir == directions::North_West)
-            return &north;
     }
     if (dir == directions::East)
         return &east;

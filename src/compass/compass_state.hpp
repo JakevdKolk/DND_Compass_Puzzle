@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino.h>
+#include <vector>
 
 enum class directions
 {
@@ -47,8 +48,8 @@ public:
     }
 
     virtual void handleDirection(directions dir) = 0;
-
-    void pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout);
+    virtual void playPuzzle(const std::vector<directions> &steps, int puzzleDelay);
+    virtual void pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout);
 };
 
 class compass_context
@@ -68,10 +69,13 @@ public:
 
     void transitionTo(compass_state *state)
     {
+        // if (this->state_ != nullptr)
+        //     delete this->state_;
         this->state_ = state;
         this->state_->set_context(this);
     }
 
+    void playPuzzle(const std::vector<directions> &steps, int puzzleDelay) { state_->playPuzzle(steps, puzzleDelay); }
     void handleDirection(directions dir) { state_->handleDirection(dir); }
     void pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout) { state_->pulseDirection(state, dir, pulseCount, pulseTimeout); };
 };

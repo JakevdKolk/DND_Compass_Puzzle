@@ -26,6 +26,17 @@ public:
     void Execute(String args) const override;
 };
 
+class compassPuzzleCommand : public userCommand
+{
+private:
+    compass_context *context_;
+    static directions parseDirection(const String &token);
+
+public:
+    explicit compassPuzzleCommand(compass_context *context);
+    void Execute(String args) const override;
+};
+
 struct CompassColorRegistration
 {
     const char *name;

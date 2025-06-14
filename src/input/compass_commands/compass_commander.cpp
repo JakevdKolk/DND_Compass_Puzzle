@@ -28,6 +28,61 @@ void compassPulseDirectonCommand::Execute(String args) const
     context_->pulseDirection(state_, direction_, pulseCount, pulseTimeout);
 }
 
+compassPuzzleCommand::compassPuzzleCommand(compass_context *context)
+    : context_(context) {}
+
+directions compassPuzzleCommand::parseDirection(const String &token)
+{
+    if (token == "N")
+        return directions::North;
+    if (token == "E")
+        return directions::East;
+    if (token == "S")
+        return directions::South;
+    if (token == "W")
+        return directions::West;
+    if (token == "NE")
+        return directions::North_East;
+    if (token == "NW")
+        return directions::North_West;
+    if (token == "SE")
+        return directions::South_East;
+    if (token == "SW")
+        return directions::South_West;
+    if (token == "ALL")
+        return directions::All;
+    if (token == "OFF")
+        return directions::Off;
+    return directions::Off;
+}
+
+void compassPuzzleCommand::Execute(String args) const
+{
+    std::vector<directions> puzzle;
+    int delayMs = 300;
+
+    int lastSpace = args.lastIndexOf(' ');
+    String possibleDelay = args.substring(lastSpace + 1);
+
+    if (possibleDelay.toInt() > 0)
+    {
+        delayMs = possibleDelay.toInt();
+        args = args.substring(0, lastSpace);
+    }
+
+    while (args.length() > 0)
+    {
+        int spaceIndex = args.indexOf(' ');
+        String token = (spaceIndex == -1) ? args : args.substring(0, spaceIndex);
+        puzzle.push_back(parseDirection(token));
+        if (spaceIndex == -1)
+            break;
+        args = args.substring(spaceIndex + 1);
+    }
+
+    context_->playPuzzle(puzzle, delayMs);
+}
+
 extern state_north north;
 extern state_east east;
 extern state_south south;

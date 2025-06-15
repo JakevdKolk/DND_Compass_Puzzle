@@ -77,6 +77,8 @@ void setup()
 
   manager.registerCommand("COMPASS_PUZ", new compassPuzzleCommand(&context));
 
+  manager.registerCommand("COMP_SAVE", new compassSavePuzzleCommand(&context));
+  manager.registerCommand("COMP_LOAD", new compassLoadPuzzleCommand(&context));
 }
 
 void loop()

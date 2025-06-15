@@ -80,7 +80,84 @@ void compassPuzzleCommand::Execute(String args) const
         args = args.substring(spaceIndex + 1);
     }
 
+    if (puzzle.empty() || puzzle.back() != directions::Off)
+    {
+        puzzle.push_back(directions::Off);
+    }
+
     context_->playPuzzle(puzzle, delayMs);
+}
+
+directions compassSavePuzzleCommand::parseDirection(const String &token)
+{
+    if (token == "N")
+        return directions::North;
+    if (token == "E")
+        return directions::East;
+    if (token == "S")
+        return directions::South;
+    if (token == "W")
+        return directions::West;
+    if (token == "NE")
+        return directions::North_East;
+    if (token == "NW")
+        return directions::North_West;
+    if (token == "SE")
+        return directions::South_East;
+    if (token == "SW")
+        return directions::South_West;
+    if (token == "ALL")
+        return directions::All;
+    if (token == "OFF")
+        return directions::Off;
+    return directions::Off;
+}
+
+compassSavePuzzleCommand::compassSavePuzzleCommand(compass_context *context)
+    : context_(context) {}
+
+void compassSavePuzzleCommand::Execute(String args) const
+{
+    std::vector<directions> steps;
+    int delayMs = 300;
+
+    int lastSpace = args.lastIndexOf(' ');
+    String possibleDelay = args.substring(lastSpace + 1);
+
+    if (possibleDelay.toInt() > 0)
+    {
+        delayMs = possibleDelay.toInt();
+        args = args.substring(0, lastSpace);
+    }
+
+    while (args.length() > 0)
+    {
+        int spaceIndex = args.indexOf(' ');
+        String token = (spaceIndex == -1) ? args : args.substring(0, spaceIndex);
+        steps.push_back(parseDirection(token));
+        if (spaceIndex == -1)
+            break;
+        args = args.substring(spaceIndex + 1);
+    }
+
+    if (steps.empty() || steps.back() != directions::Off)
+    {
+        steps.push_back(directions::Off);
+    }
+
+    PuzzleMemory::savePuzzle(steps, delayMs);
+    Serial.println("Puzzle saved");
+}
+
+compassLoadPuzzleCommand::compassLoadPuzzleCommand(compass_context *context)
+    : context_(context) {}
+
+void compassLoadPuzzleCommand::Execute(String args) const
+{
+    uint16_t delay;
+    auto puzzle = PuzzleMemory::loadPuzzle(delay);
+    Serial.println("Playing puzzle");
+    context_->playPuzzle(puzzle, delay);
 }
 
 extern state_north north;

@@ -1,10 +1,9 @@
 # DND_Compass_Puzzle
 
-### Command list
+# RGB Commands
 
-## RGB Commands
+## RGB LED
 
-# RGB LED
 
 | Command       | Description            |
 | ------------- | ---------------------- |
@@ -22,7 +21,8 @@
 | `RGB_WHITE`   | Set color to White     |
 | `RGB_OFF`     | Set color to Off       |
 
-# RGB pulse LED
+## RGB pulse LED
+
 
 | Command         | Description                             |
 | --------------- | --------------------------------------- |
@@ -39,9 +39,10 @@
 | `P_RGB_CYAN`    | Pulse Cyan                              |
 | `P_RGB_WHITE`   | Pulse White                             |
 
-## Compass Comands
+# Compass Comands
 
-# Compass Directions
+## Compass Directions
+
 
 | Command       | Description               |
 | ------------- | ------------------------- |
@@ -56,7 +57,8 @@
 | `COMPASS_ALL` | Turn on all directions    |
 | `COMPASS_OFF` | Turn off all compass LEDs |
 
-# Compass Directions Pulsing
+## Compass Directions Pulsing
+
 
 | Command         | Description                      |
 | --------------- | -------------------------------- |
@@ -70,7 +72,8 @@
 | `P_COMPASS_SW`  | Pulse South + West               |
 | `P_COMPASS_ALL` | Pulse all directions             |
 
-## Usage
+### Usage
+
 
 You can call:
 
@@ -79,6 +82,33 @@ P_COMPASS_N 3 150
 ```
 
 In the serial monitor to pulse North 3 times at 150ms delay.
+
+## Compass Puzzle
+
+| Command     | Description                 |
+| ----------- | --------------------------- |
+| `COMP_PUZ`  | Make a puzzle               |
+| `COMP_SAVE` | save a puzzle to memory     |
+| `COMP_LOAD` | load the puzzle from memory |
+
+
+### Usage
+
+You can call:
+
+```
+COMPASS_PUZ N NE NW S SE SW 500
+```
+
+in the serial monitor to show to puzzle shown with the compass lights
+
+# Vibration Monitor Commands
+
+| Command   | Description              |
+| --------- | ------------------------ |
+| `VIB_ON`  | Turn vibration motor on  |
+| `VIB_OFF` | Turn vibration motor off |
+
 
 ### Electrical diagram
 

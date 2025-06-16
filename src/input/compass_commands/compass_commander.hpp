@@ -1,6 +1,8 @@
 #pragma once
 #include "../InputCommander.hpp"
 #include "../../compass/directions/state_directions.hpp"
+#include "../../compass/memory/puzzle_memory.hpp"
+
 
 class compassHandleDirectonCommand : public userCommand
 {
@@ -25,6 +27,40 @@ public:
     compassPulseDirectonCommand(compass_context *context, compass_state *state, directions dir);
     void Execute(String args) const override;
 };
+
+class compassPuzzleCommand : public userCommand
+{
+private:
+    compass_context *context_;
+    static directions parseDirection(const String &token);
+
+public:
+    explicit compassPuzzleCommand(compass_context *context);
+    void Execute(String args) const override;
+};
+
+class compassSavePuzzleCommand : public userCommand
+{
+private:
+    compass_context *context_;
+    static directions parseDirection(const String &token);
+
+public:
+    explicit compassSavePuzzleCommand(compass_context *context);
+    void Execute(String args) const override;
+};
+
+class compassLoadPuzzleCommand : public userCommand
+{
+private:
+    compass_context *context_;
+
+public:
+    explicit compassLoadPuzzleCommand(compass_context *context);
+    void Execute(String args) const override;
+};
+
+
 
 struct CompassColorRegistration
 {

@@ -80,9 +80,12 @@ In the serial monitor to pulse North 3 times at 150ms delay.
 
 ## Compass Puzzle
 
-| Command       | Description   |
-| ------------- | ------------- |
-| `COMPASS_PUZ` | Make a puzzle |
+| Command     | Description                 |
+| ----------- | --------------------------- |
+| `COMP_PUZ`  | Make a puzzle               |
+| `COMP_SAVE` | save a puzzle to memory     |
+| `COMP_LOAD` | load the puzzle from memory |
+
 
 ### Usage
 

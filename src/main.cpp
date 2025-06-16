@@ -7,7 +7,6 @@
 #include "input/compass_commands/compass_commander.hpp"
 #include "input/vibration_motor_commands/vibration_motor_commander.hpp"
 
-
 Colors colorHandler;
 
 state_north north;
@@ -21,7 +20,6 @@ vib_state_on vib_on;
 vib_state_off vib_off;
 
 commandManager manager;
-
 
 compass_context context(&off);
 vibration_context vib_context(&vib_off);
@@ -81,31 +79,6 @@ void setup()
 
   manager.registerCommand("COMP_SAVE", new compassSavePuzzleCommand(&context));
   manager.registerCommand("COMP_LOAD", new compassLoadPuzzleCommand(&context));
-
-}
-
-
-  for (int i = 0; i < commandListSize; i++)
-  {
-    RGBColorRegistration reg = commandList[i];
-    manager.registerCommand(reg.name, new RGBSetColorCommand(&colorHandler, reg.color));
-
-    String pulseName = "P_" + String(reg.name);
-    manager.registerCommand(pulseName, new RGBPulseLEDCommand(&colorHandler, reg.color));
-  }
-
-  for (int i = 0; i < compassCommandListSize; ++i)
-  {
-    const auto &reg = compassCommandList[i];
-
-    manager.registerCommand(reg.name, new compassHandleDirectonCommand(&context, reg.state, reg.dir));
-
-    String pulseName = "P_" + String(reg.name);
-    manager.registerCommand(pulseName, new compassPulseDirectonCommand(&context, reg.state, reg.dir));
-  }
-
-  manager.registerCommand("RGB_OFF", new RGBSetColorCommand(&colorHandler, colorCodes::White)); // RGB_COLORWHITE
-  manager.registerCommand("COMPASS_OFF", new compassHandleDirectonCommand(&context, &off, directions::Off));
 }
 void loop()
 {
@@ -120,6 +93,5 @@ void loop()
     manager.executeCommand(input);
 
     Serial.println("Command executed: " + input);
-
   }
 }

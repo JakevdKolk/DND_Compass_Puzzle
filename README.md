@@ -4,6 +4,7 @@
 
 ## RGB LED
 
+
 | Command       | Description            |
 | ------------- | ---------------------- |
 | `RGB_PA`      | Set color to Aether    |
@@ -21,6 +22,7 @@
 | `RGB_OFF`     | Set color to Off       |
 
 ## RGB pulse LED
+
 
 | Command         | Description                             |
 | --------------- | --------------------------------------- |
@@ -41,6 +43,7 @@
 
 ## Compass Directions
 
+
 | Command       | Description               |
 | ------------- | ------------------------- |
 | `COMPASS_N`   | Light up North            |
@@ -56,6 +59,7 @@
 
 ## Compass Directions Pulsing
 
+
 | Command         | Description                      |
 | --------------- | -------------------------------- |
 | `P_COMPASS_N`   | Pulse North (default: 1x, 200ms) |
@@ -69,6 +73,7 @@
 | `P_COMPASS_ALL` | Pulse all directions             |
 
 ### Usage
+
 
 You can call:
 
@@ -103,6 +108,7 @@ in the serial monitor to show to puzzle shown with the compass lights
 | --------- | ------------------------ |
 | `VIB_ON`  | Turn vibration motor on  |
 | `VIB_OFF` | Turn vibration motor off |
+
 
 ### Electrical diagram
 

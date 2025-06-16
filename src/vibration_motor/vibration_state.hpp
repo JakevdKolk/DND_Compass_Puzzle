@@ -4,7 +4,8 @@
 enum class vibration_statuses
 {
     On,
-    Off
+    Off,
+    Pulsing
 };
 
 class vibration_context;
@@ -29,7 +30,12 @@ public:
         this->context_ = context;
     }
 
-    virtual void handleState(vibration_statuses statuses) = 0;
+    virtual void handleState(vibration_statuses statuses)
+    {
+    }
+    virtual void hanldeVibrationPulse(vibration_statuses statuses, int timeout)
+    {
+    }
 };
 
 class vibration_context
@@ -54,4 +60,5 @@ public:
     }
 
     void handleState(vibration_statuses statuses) { state_->handleState(statuses); }
+    void hanldeVibrationPulse(vibration_statuses statuses, int timeout) { state_->hanldeVibrationPulse(statuses, timeout); }
 };

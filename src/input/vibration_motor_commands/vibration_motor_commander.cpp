@@ -1,9 +1,18 @@
 #include "vibration_motor_commander.hpp"
 
-VibrationMotorCommands::VibrationMotorCommands(vibration_context *context, vibration_state *state, vibration_statuses statuses) : context_(context), state_(state), statuses_(statuses) {}
+VibrationMotorCommands::VibrationMotorCommands(vibration_context *context, vibration_state *state, vibration_statuses statuses, bool isPulse, int pulseTimeout)
+    : context_(context), state_(state), statuses_(statuses), isPulse_(isPulse), pulseTimeout_(pulseTimeout) {}
 
 void VibrationMotorCommands::Execute(String args) const
 {
     context_->transitionTo(state_);
-    context_->handleState(statuses_);
-};
+
+    if (isPulse_)
+    {
+        state_->hanldeVibrationPulse(statuses_, pulseTimeout_);
+    }
+    else
+    {
+        context_->handleState(statuses_);
+    }
+}

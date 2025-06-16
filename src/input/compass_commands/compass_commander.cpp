@@ -160,6 +160,7 @@ void compassLoadPuzzleCommand::Execute(String args) const
     context_->playPuzzle(puzzle, delay);
 }
 
+
 extern state_north north;
 extern state_east east;
 extern state_south south;

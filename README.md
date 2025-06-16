@@ -86,6 +86,7 @@ In the serial monitor to pulse North 3 times at 150ms delay.
 | `COMP_SAVE` | save a puzzle to memory     |
 | `COMP_LOAD` | load the puzzle from memory |
 
+
 ### Usage
 
 You can call:

@@ -59,6 +59,7 @@ public:
     void Execute(String args) const override;
 };
 
+
 struct CompassColorRegistration
 {
     const char *name;

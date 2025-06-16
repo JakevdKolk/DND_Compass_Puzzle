@@ -75,7 +75,7 @@ void setup()
 
   manager.registerCommand("VIB_ON", new VibrationMotorCommands(&vib_context, &vib_on, vibration_statuses::On));
   manager.registerCommand("VIB_OFF", new VibrationMotorCommands(&vib_context, &vib_off, vibration_statuses::Off));
-  manager.registerCommand("VIB_PULSE", new VibrationMotorCommands(&vib_context, &vib_pulse, vibration_statuses::Pulsing, true, 1000));
+  manager.registerCommand("VIB_PULSE", new VibrationMotorCommands(&vib_context, &vib_pulse, vibration_statuses::Pulsing, true));
 
   manager.registerCommand("COMP_PUZ", new compassPuzzleCommand(&context));
 

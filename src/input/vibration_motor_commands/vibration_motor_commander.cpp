@@ -1,7 +1,7 @@
 #include "vibration_motor_commander.hpp"
 
-VibrationMotorCommands::VibrationMotorCommands(vibration_context *context, vibration_state *state, vibration_statuses statuses, bool isPulse, int pulseTimeout)
-    : context_(context), state_(state), statuses_(statuses), isPulse_(isPulse), pulseTimeout_(pulseTimeout) {}
+VibrationMotorCommands::VibrationMotorCommands(vibration_context *context, vibration_state *state, vibration_statuses statuses, bool isPulse)
+    : context_(context), state_(state), statuses_(statuses), isPulse_(isPulse) {}
 
 void VibrationMotorCommands::Execute(String args) const
 {
@@ -9,7 +9,7 @@ void VibrationMotorCommands::Execute(String args) const
 
     if (isPulse_)
     {
-        state_->hanldeVibrationPulse(statuses_, pulseTimeout_);
+        state_->hanldeVibrationPulse(statuses_, args.toInt());
     }
     else
     {

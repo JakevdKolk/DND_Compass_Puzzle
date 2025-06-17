@@ -25,14 +25,44 @@ void Colors::resetColor()
     SetColor(0, 0, 0);
 }
 
-void Colors::pulse_rgbLED(colorCodes color, int loopCount, int timeout)
+void Colors::startPulse(colorCodes color, int loopCount, int timeout)
 {
-    for (int i = 0; i < loopCount; ++i)
+    pulseColor = color;
+    pulseCount = loopCount;
+    pulseTimeout = timeout;
+    currentPulse = 0;
+    ledOn = false;
+    isPulsing = true;
+    lastToggleTime = millis();
+}
+
+void Colors::updatePulse()
+{
+    if (!isPulsing)
+        return;
+
+    unsigned long currentTime = millis();
+    if (currentTime - lastToggleTime >= pulseTimeout / 2)
     {
-        applyColor(color);
-        delay(timeout / 2);
-        resetColor();
-        delay(timeout / 2);
+        lastToggleTime = currentTime;
+
+        if (ledOn)
+        {
+            resetColor();
+            ledOn = false;
+            currentPulse++;
+        }
+        else
+        {
+            applyColor(pulseColor);
+            ledOn = true;
+        }
+
+        if (currentPulse >= pulseCount)
+        {
+            isPulsing = false;
+            resetColor();
+        }
     }
 }
 

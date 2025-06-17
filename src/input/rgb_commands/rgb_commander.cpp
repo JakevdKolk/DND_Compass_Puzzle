@@ -9,7 +9,7 @@ void RGBSetColorCommand::Execute(String args) const
 }
 
 RGBPulseLEDCommand::RGBPulseLEDCommand(Colors *colors, colorCodes color)
-    : color_(color), colors_(colors) {} 
+    : color_(color), colors_(colors) {}
 
 void RGBPulseLEDCommand::Execute(String args) const
 {
@@ -23,7 +23,7 @@ void RGBPulseLEDCommand::Execute(String args) const
         timeout = args.substring(spaceIndex + 1).toInt();
     }
 
-    colors_->pulse_rgbLED(color_, count, timeout);
+    colors_->startPulse(color_, count, timeout);
 }
 
 RGBColorRegistration commandList[] = {

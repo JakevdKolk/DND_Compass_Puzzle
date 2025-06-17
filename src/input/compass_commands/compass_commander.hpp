@@ -3,7 +3,6 @@
 #include "../../compass/directions/state_directions.hpp"
 #include "../../compass/memory/puzzle_memory.hpp"
 
-
 class compassHandleDirectonCommand : public userCommand
 {
 private:
@@ -59,8 +58,6 @@ public:
     explicit compassLoadPuzzleCommand(compass_context *context);
     void Execute(String args) const override;
 };
-
-
 
 struct CompassColorRegistration
 {

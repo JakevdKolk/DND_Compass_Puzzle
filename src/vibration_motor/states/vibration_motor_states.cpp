@@ -16,16 +16,36 @@ void vib_state_on::handleState(vibration_statuses statuses)
 }
 void vib_state_off::handleState(vibration_statuses statuses)
 {
+    isPulsing = false;
     turn_off();
 }
-void vib_state_pulse::hanldeVibrationPulse(vibration_statuses statuses, int timeout)
+void vib_state_pulse::startVibrationPulse(vibration_statuses statuses, int timeout)
 {
-    turn_off();
-    while (statuses == vibration_statuses::Pulsing)
+    pulseTimeout = timeout;
+    isPulsing = true;
+    vibOn = false;
+    lastToggleTime = millis();
+}
+
+void vib_state_pulse::updateVibrationPulse()
+{
+    if (!isPulsing)
+        return;
+
+    unsigned long currentTime = millis();
+    if (currentTime - lastToggleTime >= pulseTimeout / 2)
     {
-        turn_on();
-        delay(timeout / 2);
-        turn_off();
-        delay(timeout / 2);
+        lastToggleTime = currentTime;
+
+        if (vibOn)
+        {
+            turn_off();
+            vibOn = false;
+        }
+        else
+        {
+            turn_on();
+            vibOn = true;
+        }
     }
 }

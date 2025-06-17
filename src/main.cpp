@@ -85,6 +85,7 @@ void setup()
 void loop()
 {
   colorHandler.updatePulse();
+  vib_pulse.updateVibrationPulse();
 
   if (Serial.available())
   {

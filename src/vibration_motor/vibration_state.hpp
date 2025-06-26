@@ -44,6 +44,7 @@ public:
     {
     }
     virtual void updateVibrationPulse()
+
     {
     }
 };
@@ -77,4 +78,5 @@ public:
 
     void handleState(vibration_statuses statuses) { state_->handleState(statuses); }
     void startVibrationPulse(vibration_statuses statuses, int timeout) { state_->startVibrationPulse(statuses, timeout); }
+
 };

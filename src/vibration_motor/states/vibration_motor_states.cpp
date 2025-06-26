@@ -47,5 +47,6 @@ void vib_state_pulse::updateVibrationPulse()
             turn_on();
             vibOn = true;
         }
+
     }
 }

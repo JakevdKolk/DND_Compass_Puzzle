@@ -6,6 +6,7 @@
 #include "input/rgb_commands/rgb_commander.hpp"
 #include "input/compass_commands/compass_commander.hpp"
 #include "input/vibration_motor_commands/vibration_motor_commander.hpp"
+#include "compass/compass_state.hpp"
 
 Colors colorHandler;
 
@@ -86,6 +87,7 @@ void loop()
 {
   colorHandler.updatePulse();
   vib_pulse.updateVibrationPulse();
+  context.updateCompassPulse();
 
   if (Serial.available())
   {

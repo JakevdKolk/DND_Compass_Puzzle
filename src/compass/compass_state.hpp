@@ -22,15 +22,23 @@ class compass_state
 {
 
 protected:
-    compass_context *context_;
     int northPin_ = 4;
     int eastPin_ = 5;
     int southPin_ = 16;
     int westPin_ = 17;
-    void setAllHigh();
-    void setAllLow();
 
 public:
+    compass_context *context_;
+    void setAllHigh();
+    void setAllLow();
+    bool isPulsing = false;
+    int pulseCount = 0;
+    int pulseTimeout = 0;
+    int currentPulse = 0;
+    bool ledOn = false;
+    unsigned long lastToggleTime = 0;
+    directions dir_;
+
     compass_state() : context_(nullptr)
     {
         pinMode(northPin_, OUTPUT);
@@ -50,6 +58,7 @@ public:
     virtual void handleDirection(directions dir) = 0;
     virtual void playPuzzle(const std::vector<directions> &steps, int puzzleDelay);
     virtual void pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout);
+    virtual void updateCompassPulse();
 };
 
 class compass_context
@@ -78,4 +87,5 @@ public:
     void playPuzzle(const std::vector<directions> &steps, int puzzleDelay) { state_->playPuzzle(steps, puzzleDelay); }
     void handleDirection(directions dir) { state_->handleDirection(dir); }
     void pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout) { state_->pulseDirection(state, dir, pulseCount, pulseTimeout); };
+    void updateCompassPulse() { state_->updateCompassPulse(); };
 };

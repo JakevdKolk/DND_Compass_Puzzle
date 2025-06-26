@@ -39,7 +39,7 @@ public:
     unsigned long lastToggleTime = 0;
     directions dir_;
 
-    compass_state() : context_(nullptr)
+    compass_state() : context_(nullptr), dir_(directions::Off)
     {
         pinMode(northPin_, OUTPUT);
         pinMode(eastPin_, OUTPUT);

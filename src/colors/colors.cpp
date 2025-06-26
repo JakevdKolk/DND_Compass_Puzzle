@@ -2,7 +2,7 @@
 
 int rgbLED[3] = {12, 13, 14}; // Define RGB LED pins globally
 
-Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b)
+Colors::Colors(int r, int g, int b) : redChannel(r), greenChannel(g), blueChannel(b), pulseColor(colorCodes::Off)
 {
     ledcSetup(redChannel, 5000, 8);
     ledcSetup(greenChannel, 5000, 8);

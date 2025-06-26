@@ -10,6 +10,7 @@ void VibrationMotorCommands::Execute(String args) const
     if (isPulse_)
     {
         state_->startVibrationPulse(statuses_, args.toInt());
+
     }
     else
     {

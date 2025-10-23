@@ -30,11 +30,23 @@ private:
     int greenChannel;
     int blueChannel;
 
+    // Pulse state tracking
+    bool isPulsing = false;
+    colorCodes pulseColor;
+    int pulseCount = 0;
+    int pulseTimeout = 0;
+    int currentPulse = 0;
+    bool ledOn = false;
+    unsigned long lastToggleTime = 0;
+
 public:
     explicit Colors(int r = RED_CHANNEL, int g = GREEN_CHANNEL, int b = BLUE_CHANNEL);
 
     void applyColor(colorCodes color);
     void SetColor(int r, int g, int b);
     void resetColor();
+
+    void startPulse(colorCodes color, int loopCount, int timeout);
+    void updatePulse();
     void pulse_rgbLED(colorCodes color, int loopCount, int timeout);
 };

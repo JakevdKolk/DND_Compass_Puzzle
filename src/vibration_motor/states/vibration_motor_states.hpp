@@ -16,5 +16,7 @@ public:
 class vib_state_pulse : public vibration_state
 {
 public:
-    void hanldeVibrationPulse(vibration_statuses statuses, int timeout) override;
+    void startVibrationPulse(vibration_statuses statuses, int timeout) override;
+    void updateVibrationPulse() override;
+
 };

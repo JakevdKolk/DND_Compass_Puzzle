@@ -52,13 +52,47 @@ void compass_state::playPuzzle(const std::vector<directions> &steps, int puzzleD
 
 void compass_state::pulseDirection(compass_state *state, directions dir, int pulseCount, int pulseTimeout)
 {
+    // Optionally transition to correct state externally
     context_->transitionTo(state);
-    for (int i = 0; i < pulseCount; i++)
+
+    isPulsing = false; // reset previous state if needed
+
+    this->dir_ = dir;
+    this->pulseCount = pulseCount;
+    this->pulseTimeout = pulseTimeout;
+    this->currentPulse = 0;
+    this->ledOn = false;
+    this->isPulsing = true;
+    this->lastToggleTime = millis();
+}
+
+void compass_state::updateCompassPulse()
+{
+    if (!isPulsing)
+        return;
+
+    unsigned long currentTime = millis();
+    if (currentTime - lastToggleTime >= pulseTimeout / 2)
     {
-        context_->handleDirection(dir);
-        delay(pulseTimeout / 2);
-        setAllHigh();
-        delay(pulseTimeout / 2);
+        lastToggleTime = currentTime;
+
+        if (ledOn)
+        {
+            setAllHigh();
+            ledOn = false;
+            currentPulse++;
+        }
+        else
+        {
+            handleDirection(dir_);
+            ledOn = true;
+        }
+
+        if (currentPulse >= pulseCount)
+        {
+            isPulsing = false;
+            setAllHigh(); // optional final reset
+        }
     }
 }
 

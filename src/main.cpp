@@ -6,6 +6,7 @@
 #include "input/rgb_commands/rgb_commander.hpp"
 #include "input/compass_commands/compass_commander.hpp"
 #include "input/vibration_motor_commands/vibration_motor_commander.hpp"
+#include "compass/compass_state.hpp"
 
 Colors colorHandler;
 
@@ -70,7 +71,7 @@ void setup()
     manager.registerCommand(pulseName, new compassPulseDirectonCommand(&context, reg.state, reg.dir));
   }
 
-  manager.registerCommand("RGB_OFF", new RGBSetColorCommand(&colorHandler, colorCodes::White)); // RGB_COLORWHITE
+  manager.registerCommand("RGB_OFF", new RGBSetColorCommand(&colorHandler, colorCodes::Off)); // RGB_COLORWHITE
   manager.registerCommand("COMPASS_OFF", new compassHandleDirectonCommand(&context, &off, directions::Off));
 
   manager.registerCommand("VIB_ON", new VibrationMotorCommands(&vib_context, &vib_on, vibration_statuses::On));
@@ -84,6 +85,9 @@ void setup()
 }
 void loop()
 {
+  colorHandler.updatePulse();
+  vib_pulse.updateVibrationPulse();
+  context.updateCompassPulse();
 
   if (Serial.available())
   {
